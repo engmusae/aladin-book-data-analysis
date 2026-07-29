@@ -24,3 +24,4 @@ if file_path.exists():  # 파일이 존재할 경우
         print(f"{book} : {categoryName}")  # 도서 제목과 카테고리를 출력하는 코드
 else:
     print(f"파일이 존재하지 않습니다: {file_path}")
+    

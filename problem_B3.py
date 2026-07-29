@@ -29,3 +29,4 @@ if file_path.exists():  # 파일이 존재할 경우
         print(f"{category}: {count}권, 평균 가격 {average_price:.2f}원")  # 도서 수와 평균 가격을 출력하는 코드
 else:
     print(f"파일이 존재하지 않습니다: {file_path}")
+    
