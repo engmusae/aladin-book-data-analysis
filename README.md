@@ -1,93 +1,23 @@
-# pjt_01
+## 시간이 부족해서 임시로 작성했습니다 ^.^
 
+## 구현 과정 및 느낀 점 기록
 
+### 1. 이번에 작업하면서 배운 내용들
+- 알라딘 오픈 API에서 받아온 JSON 파일에서 데이터가 어떻게 들어가 있는지 살펴보고, for문 돌리면서 필요한 데이터(책 제목, 작가, 가격, 출판사 등)를 하나씩 꺼내는 연습을 했다.
+- 그냥 단순히 데이터를 출력하는 것뿐만 아니라, 출판사별로 책이 몇 권 있는지, 카테고리별로 총 금액과 평균 가격이 얼마나 되는지 집계해서 정리해봤다.
+- 출간일 순으로 정렬해서 가장 최근에 나온 책 10개만 따로 뽑아내는 기능도 구현해봤다.
 
-## Getting started
+---
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### 2. 하면서 막혔던 부분이랑 해결한 과정
+- 딕셔너리에 데이터를 저장하는데 자꾸 마지막 책 하나만 남고 데이터가 다 사라지는 문제가 있었다. 알고 보니까 딕셔너리 키 이름을 계속 똑같이 지정해두고 값만 넣어서, 데이터가 새로 쌓이는 게 아니라 계속 덮어씌워지고 있던 거였다. 묶어서 집계할 때는 값 부분에 리스트나 다른 딕셔너리를 넣어서 차곡차곡 쌓아줘야 한다는 걸 알게 됐다.
+- setdefault라는 기능을 쓸 때, 이걸 쓰면 자동으로 숫자가 더해지는 줄 알고 헤맸다. 실제로는 공간을 만들어주기만 하는 거라서, 그 뒤에 +1이나 가격을 더해주는 코드를 직접 붙여줘야 정상적으로 동작한다는 걸 알게 됐다.
+- 딕셔너리 안에 딕셔너리가 들어있는 구조에서 값을 꺼내서 계산할 때 자꾸 에러가 났다. for문으로 딕셔너리를 또 돌리니까 숫자가 들어와야 할 자리에 'count' 같은 글자 이름이 들어가서 계산이 안 된 거였다. 복잡하게 for문 또 안 돌리고 그냥 ['count'] 처럼 이름을 직접 지정해서 숫자를 꺼내야 한다는 걸 배웠다.
+- print 함수 위치를 for문 안에 잘못 넣어서 터미널 창에 같은 출력이 몇백 줄씩 미친 듯이 올라오기도 했다. 들여쓰기 위치 하나 때문에 완전히 다른 결과가 나오는 걸 보고 위치 잡는 게 정말 중요하다고 느꼈다.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+---
 
-## Add your files
-
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/jes107/pjt_01.git
-git branch -M master
-git push -uf origin master
-```
-
-## Integrate with your tools
-
-* [Set up project integrations](https://lab.ssafy.com/jes107/pjt_01/-/settings/integrations)
-
-## Collaborate with your team
-
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+### 3. 새로 알게 된 점과 느낀 점
+- 딕셔너리를 쓸 때 키 값을 상황에 따라 어떻게 잡아야 하는지 감을 조금 잡았다.
+- git add, commit, push 과정으로 내 컴퓨터에서 작업한 내용을 원격 저장소로 올리는 전체적인 흐름을 익혔다.
+- 코드를 짤 때 내가 생각한 대로 컴퓨터가 알아서 동작하는 게 아니라, 데이터가 한 줄 한 줄 실행될 때마다 어떻게 바뀌는지 머릿속으로 그리면서 짜야 한다는 걸 크게 느꼈다. 막히는 부분이 생겨도 어디서 잘못됐는지 차근차근 출력해보면서 원인을 찾아가는 게 제일 중요하다는 걸 배웠다.
